@@ -1,4 +1,6 @@
-/* GET home page. */
+var crypto = require('crypto'),
+    User = require('../models/user.js');
+
 module.exports = function(app) {
 
   app.get('/', function(req, res) {
