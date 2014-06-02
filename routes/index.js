@@ -6,38 +6,54 @@ module.exports = function(app) {
   app.get('/', function(req, res) {
     res.render('index', {
       title: 'Home',
-      s: req.session.user,
+      user: req.session.user,
+      success: req.flash('success').toString(),
+      error: req.flash('error').toString()
     });
   });
 
+  //login
+  app.get('/login', checkNotLogin);
   app.get('/login', function(req, res) {
     res.render('login', {
-      title: 'Login'
+      title: '登录',
+      user: req.session.user,
+      success: req.flash('success').toString(),
+      error: req.flash('error').toString()
     });
   });
 
+  app.post('/login', checkNotLogin);
+  app.post('/login', function(req, res) {
+    var md5 = crypto.createHash('md5'),
+      password = md5.update(req.body.password).digest('hex');
+    User.get(req.body.name, function(err, user) {
+      if (!user) {
+        req.flash('error', '用户不存在!');
+        return res.redirect('/login');
+      }
+      if (user.password != password) {
+        req.flash('error', '密码错误!');
+        return res.redirect('/login');
+      }
+      req.session.user = user;
+      req.flash('success', '登陆成功!');
+      res.redirect('/');
+    });
+  });
+
+  //reg
+  app.get('/reg', checkNotLogin);
   app.get('/reg', function(req, res) {
     res.render('reg', {
-      title: 'REGISTER'
+      title: 'REGISTER',
+      user: req.session.user,
+      success: req.flash('success').toString(),
+      error: req.flash('error').toString()
     });
   });
 
-  app.get('/post', function(req, res) {
-    res.render('post', {
-      title: 'Post'
-    });
-  });
-
-  app.get('/logout', function(req, res) {
-    res.render('logout', {
-      title: 'Teemo'
-    });
-  });
-
-  app.get('/d', function(req, res) {
-    res.download('../css/main.css');
-  });
-
+  app.post('/reg', checkNotLogin);
   app.post('/reg', function(req, res) {
     var name = req.body.name,
       password = req.body.password,
@@ -73,4 +89,36 @@ module.exports = function(app) {
       });
     });
   });
+
+  app.get('/post', function(req, res) {
+    res.render('post', {
+      title: 'Post'
+    });
+  });
+
+  app.get('/d', function(req, res) {
+    res.download('../css/main.css');
+  });
+
+  app.get('/logout', function(req, res) {
+    req.session.user = null;
+    req.flash('success', '登出成功!');
+    res.redirect('/'); //登出成功后跳转到主页
+  });
+
+  function checkLogin(req, res, next) {
+    if (!req.session.user) {
+      req.flash('error', '未登录!');
+      res.redirect('/login');
+    }
+    next();
+  }
+
+  function checkNotLogin(req, res, next) {
+    if (req.session.user) {
+      req.flash('error', '已登录!');
+      res.redirect('back'); //返回之前的页面
+    }
+    next();
+  }
 };

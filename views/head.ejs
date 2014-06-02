@@ -19,11 +19,20 @@
       <li>
         <a href="/">Home</a>
       </li>
+      <% if(user) {%>
+      <li>
+        <a href="/post">Post</a>
+      </li>
+      <li>
+        <a href="/logout">Logout</a>
+      </li>
+      <% }else{%>
       <li>
         <a href="/login">Login</a>
       </li>
       <li>
         <a href="/reg">Register</a>
       </li>
-    </ul>
-    <h1><%=title%></h1>
+      <% }%></ul>
+    <h1>
+      <%=title%></h1>
