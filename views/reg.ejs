@@ -1,18 +1,19 @@
 <%- include head %>
 
-<form role="form">
+<form role="form" method="post">
   <div class="form-group">
     <label for="exampleInputEmail1">UserName</label>
-    <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Enter email"></div>
+    <input type="text" class="form-control" id="name" name="name" placeholder="Enter email"></div>
+  <div class="form-group">
+    <label for="exampleInputPassword1">Email</label>
+    <input type="email" class="form-control" id="email" placeholder="Check Password" name="email"></div>
   <div class="form-group">
     <label for="exampleInputPassword1">Password</label>
-    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password"></div>
+    <input type="password" class="form-control" id="password" name="password" placeholder="Password"></div>
   <div class="form-group">
     <label for="exampleInputPassword1">Check Password</label>
-    <input type="text" class="form-control" id="exampleInputPassword21" placeholder="Check Password"></div>
-  <div class="form-group">
-    <label for="exampleInputPassword1">email</label>
-    <input type="email" class="form-control" id="exampleInputemail1" placeholder="email"></div>
+    <input type="password" class="form-control" id="password-repeat" placeholder="Check Password" name="password-repeat"></div>
+
   <button type="submit" class="btn btn-primary">Submit</button>
 </form>
 <%- include foot %>
