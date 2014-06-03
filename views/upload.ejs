@@ -1,0 +1,32 @@
+<%- include head %>
+<form method='post' action='/upload' enctype='multipart/form-data' >
+  <input type="file" name='file1' multiple id="file"/><br>
+  <div id="img"></div>
+  <br>
+  <input type="submit" class="btn btn-warning btn-block" />
+</form>
+
+<script>
+  var file = document.getElementById('file');
+
+  function reviewFile(){
+    var file = this.files[0]; //input
+    if( file.size > 5*1024*1024 ){  //用size属性判断文件大小不能超过5M
+      alert( "你上传的文件太大了！" )
+    }else{
+      var reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = function(e){
+        var res = this.result;
+        var i = document.getElementById('img');
+        var img = document.createElement('img');
+            img.src = res;
+            img.className = 'img-responsive img-rounded';
+            i.appendChild(img);
+      }
+    }
+  }
+
+  file.addEventListener('change',reviewFile,false);
+</script>
+<%- include foot %>
