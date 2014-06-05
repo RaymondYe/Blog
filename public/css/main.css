@@ -1,7 +1,13 @@
 body { color: #333; }
 ul,ol{ padding-left: 0; list-style: none;}
 
-/*index*/
+/* FullPage */
+.sec1{ background: url(../img/bg-1.jpg);}
+.sec2{ background: url(../img/bg-2.jpg);}
+.sec3{ background: url(../img/bg-3.jpg);}
+.sec4{ background: url(../img/bg-4.jpg);}
+
+/* Introduce */
 .index{ width: 80%; margin:20px auto;}
 
 /*Upload*/
