@@ -1,6 +1,6 @@
-var crypto = require('crypto'),
-  User = require('../modules/user.js');
-Post = require('../modules/post.js');
+var crypto = require('crypto');
+var User = require('../modules/user.js');
+var Post = require('../modules/post.js');
 
 //upload file
 var fs = require('fs');
@@ -99,6 +99,20 @@ module.exports = function(app) {
     });
   });
 
+  app.get('/logout', function(req, res) {
+    req.session.user = null;
+    req.flash('success', '登出成功!');
+    res.redirect('/'); //登出成功后跳转到主页
+  });
+
+  function checkLogin(req, res, next) {
+    if (!req.session.user) {
+      req.flash('error', '未登录!');
+      res.redirect('/login');
+    }
+    next();
+  }
+
   app.get('/post', checkLogin);
   app.get('/post', function(req, res) {
     res.render('post', {
@@ -150,24 +164,6 @@ module.exports = function(app) {
     req.flash('success', '文件上传成功!');
     res.redirect('/upload');
   });
-
-  app.get('/d', function(req, res) {
-    res.download('../css/main.css');
-  });
-
-  app.get('/logout', function(req, res) {
-    req.session.user = null;
-    req.flash('success', '登出成功!');
-    res.redirect('/'); //登出成功后跳转到主页
-  });
-
-  function checkLogin(req, res, next) {
-    if (!req.session.user) {
-      req.flash('error', '未登录!');
-      res.redirect('/login');
-    }
-    next();
-  }
 
   function checkNotLogin(req, res, next) {
     if (req.session.user) {
