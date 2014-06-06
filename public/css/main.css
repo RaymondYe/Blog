@@ -1,38 +1,10 @@
 body { color: #333; }
 ul,ol{ padding-left: 0; list-style: none;}
 
-/* FullPage */
-.sec1{ background: url(../img/bg-1.jpg);}
-.sec2{ background: url(../img/bg-2.jpg);}
-.sec3{ background: url(../img/bg-3.jpg);}
-.sec4{ background: url(../img/bg-4.jpg);}
-
-/* Introduce */
-.index{ width: 80%; margin:20px auto;}
-
-/*Upload*/
-.upload{ width: 80%; margin:20px auto;}
-
-/* Ranking */
-.ranking { min-width: 320px; padding: 15px 8px 0; }
-.ranking .panel { border: none; }
-.ranking .panel-heading { background: #009345; color: #fff; font-size: 16px; padding: 3px 10px; }
-.ranking .panel-body { background: #fafddc; padding: 0 7px 2px; }
-.ran-list li { clear: both; height: 50px; border-top: 1px solid #d1c1a9; overflow: hidden; padding: 5px 0; }
-.ran-list li:first-child { border: none; }
-.ran-list li .ran-top b { color: #fda426; font-size: 30px; position: absolute; top: -1px; }
-.ran-list li .ran-top img { margin: 4px 0 0 20px; width: 35px; }
-.ran-top { float: left; position: relative; }
-.p-info h2 { color: #333; margin: 3px 0 2px 0; font-family: '微软雅黑'; font-size: 18px; }
-.p-info p { color: #de8c18; font-size: 10px; }
-.p-info { float: left; padding: 0 10px; }
-.point { color: #189754; float: left; font-size: 16px; padding: 10px 0 0; position: absolute; right: 10px; width: 70px; }
-.shui { width: 40px; display: block; float: left; }
-.point span { display: inline-block; line-height: 35px; }
-.seed-t { width: 135px; margin: auto; position: absolute; bottom: 20px; right: 0; left: 0; }
-.seed-t>.btn { width: 100%; margin: auto; display: block; }
+/*index*/
+.page{ width: 90%; max-width: 890px; margin: auto;}
+h1{ border-left: 5px #dfdfdf solid; padding-left: 15px; margin-bottom: 15px;}
 
 /* foot */
-.foot { text-align: center; color: #333; font-size: 12px; padding-top: 15px; padding-bottom: 3em; clear: both; }
-/* Background */
-.bg-a { background: #f2f2f2; }
+footer{ text-align: center; background: rgba(0,0,0,.8); width: 100%; height: 40px; line-height: 40px; margin-top: 50px;}
+footer>p>a{ color: #fff;}
