@@ -1,0 +1,12 @@
+<%- include head %>
+<form method="post">
+
+  <h4>标题：</h4>
+  <input type="text" class="form-control" name="title" value="<%= post.title %>" disabled="disabled" />
+  <h4>正文：</h4>
+  <textarea name="post" class="form-control" rows="20" cols="100">
+    <%= post.post %></textarea>
+  <br />
+  <input type="submit" value="保存修改" class="btn btn-warning" />
+</form>
+<%- include foot %>
