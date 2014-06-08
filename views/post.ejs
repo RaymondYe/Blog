@@ -1,12 +1,11 @@
 <%- include head %>
 <form method="post" >
-  <blockquote>标题:</blockquote>
-  <input type="text" name="title">
-  <br>
+  <blockquote>标题</blockquote>
+  <input type="text" name="title" class="form-control"> <br>
   <blockquote>正文</blockquote>
-  <textarea class="form-control" name="post"></textarea>
-  标签：<br />
-<input type="text" name="tag1" /><input type="text" name="tag2" /><input type="text" name="tag3" /><br />
+  <textarea class="form-control" name="post" rows="5"></textarea><br>
+  <blockquote>标签</blockquote>
+<input type="text" name="tag1" /> <input type="text" name="tag2" /> <input type="text" name="tag3" /><br /><br>
   <input type="submit" value="Post" class="btn btn-danger btn-lg btn-block">
 </form>
 <%- include foot %>
