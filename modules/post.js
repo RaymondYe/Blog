@@ -29,7 +29,8 @@ Post.prototype.save = function(callback) {
     title: this.title,
     tags: this.tags,
     post: this.post,
-    comments: []
+    comments: [],
+    pv: 0
   };
   //打开数据库
   mongodb.open(function(err, db) {
@@ -131,15 +132,16 @@ Post.getTen = function(name, page, callback) {
     });
   });
 };
+
 //获取一篇文章
 Post.getOne = function(name, day, title, callback) {
   //打开数据库
-  mongodb.open(function(err, db) {
+  mongodb.open(function (err, db) {
     if (err) {
       return callback(err);
     }
     //读取 posts 集合
-    db.collection('posts', function(err, collection) {
+    db.collection('posts', function (err, collection) {
       if (err) {
         mongodb.close();
         return callback(err);
@@ -149,19 +151,32 @@ Post.getOne = function(name, day, title, callback) {
         "name": name,
         "time.day": day,
         "title": title
-      }, function(err, doc) {
-        mongodb.close();
+      }, function (err, doc) {
         if (err) {
+          mongodb.close();
           return callback(err);
         }
-        //解析 markdown 为 html
         if (doc) {
+          //每访问 1 次，pv 值增加 1
+          collection.update({
+            "name": name,
+            "time.day": day,
+            "title": title
+          }, {
+            $inc: {"pv": 1}
+          }, function (err) {
+            mongodb.close();
+            if (err) {
+              return callback(err);
+            }
+          });
+          //解析 markdown 为 html
           doc.post = markdown.toHTML(doc.post);
-          doc.comments.forEach(function(comment) {
+          doc.comments.forEach(function (comment) {
             comment.content = markdown.toHTML(comment.content);
           });
+          callback(null, doc);//返回查询的一篇文章
         }
-        callback(null, doc); //返回查询的一篇文章
       });
     });
   });
